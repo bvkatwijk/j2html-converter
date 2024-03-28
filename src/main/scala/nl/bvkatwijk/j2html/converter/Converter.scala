@@ -1,10 +1,9 @@
 package nl.bvkatwijk.j2html.converter
 
+import org.scalajs.dom.{DOMParser, MIMEType}
+
 object Converter:
   def toJava(html: String): String =
-    """
-      body(
-        h1("Hello, World!"),
-        img().withSrc("/img/hello.png")
-      )
-    """
+    DOMParser().parseFromString(html, MIMEType.`text/html`)
+      .firstElementChild
+      .toString
