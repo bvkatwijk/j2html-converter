@@ -2,8 +2,9 @@ package nl.bvkatwijk.j2html.converter
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
-
 import org.scalajs.dom
+import org.scalajs.dom.Element
+import org.scalajs.dom.html.TextArea
 
 // import javascriptLogo from "/javascript.svg"
 @js.native @JSImport("/javascript.svg", JSImport.Default)
@@ -21,10 +22,16 @@ def Main(): Unit =
             id="code-input"
             name="bio"
             placeholder="<h1>Enter some html!</h1>"
-            aria-label="Professional short bio"></textarea>
+            aria-label="Code Input"><div id="app"></div></textarea>
         </div>
         <div>
-          <textarea class="code code-output" id="code-output" name="read-only" readonly placeholder="Java will appear here..."></textarea>
+          <textarea
+            class="code code-output"
+            id="code-output"
+            name="read-only"
+            readonly
+            aria-label="Code Output"
+            placeholder="Java will appear here..."></textarea>
         </div>
       </div>
     </main>
@@ -33,8 +40,8 @@ def Main(): Unit =
   setupInputListener(dom.document.getElementById("code-input"), dom.document.getElementById("code-output"))
 end Main
 
+def convert(in: Element, out: Element): Unit = out.innerHTML = Converter.toJava(in.asInstanceOf[TextArea].value)
 def setupInputListener(in: dom.Element, out: dom.Element): Unit =
-  def convert(html: String): Unit = out.innerHTML = Converter.toJava(html)
-
-  in.addEventListener("input", e => convert(in.innerHTML))
+  in.addEventListener("input", e => convert(in, out))
+  convert(in, out)
 end setupInputListener
