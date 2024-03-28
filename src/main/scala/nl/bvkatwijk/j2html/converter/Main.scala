@@ -18,27 +18,23 @@ def Main(): Unit =
         <div>
           <textarea
             class="code code-input"
-              name="bio"
-              placeholder="Enter html..."
-              aria-label="Professional short bio"></textarea>
+            id="code-input"
+            name="bio"
+            placeholder="<h1>Enter some html!</h1>"
+            aria-label="Professional short bio"></textarea>
         </div>
         <div>
-          <textarea class="code code-input" name="read-only" readonly placeholder="Java will appear here..."></textarea>
+          <textarea class="code code-output" id="code-output" name="read-only" readonly placeholder="Java will appear here..."></textarea>
         </div>
       </div>
     </main>
   """
 
-  setupCounter(dom.document.getElementById("counter"))
+  setupInputListener(dom.document.getElementById("code-input"), dom.document.getElementById("code-output"))
 end Main
 
-def setupCounter(element: dom.Element): Unit =
-  var counter = 0
+def setupInputListener(in: dom.Element, out: dom.Element): Unit =
+  def convert(html: String): Unit = out.innerHTML = Converter.toJava(html)
 
-  def setCounter(count: Int): Unit =
-    counter = count
-    element.innerHTML = s"count is $counter"
-
-  element.addEventListener("click", e => setCounter(counter + 1))
-  setCounter(0)
-end setupCounter
+  in.addEventListener("input", e => convert(in.innerHTML))
+end setupInputListener
