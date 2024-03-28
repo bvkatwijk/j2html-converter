@@ -12,21 +12,21 @@ val javascriptLogo: String = js.native
 @main
 def Main(): Unit =
   dom.document.querySelector("#app").innerHTML = s"""
-    <div>
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-        <img src="$javascriptLogo" class="logo vanilla" alt="JavaScript logo" />
-      </a>
-      <h1>Hello Scala.js!</h1>
-      <div class="card">
-        <button id="counter" type="button"></button>
+    <main class="container-fluid">
+      <h1>j2html converter</h1>
+      <div class="grid">
+        <div>
+          <textarea
+            class="code code-input"
+              name="bio"
+              placeholder="Enter html..."
+              aria-label="Professional short bio"></textarea>
+        </div>
+        <div>
+          <textarea class="code code-input" name="read-only" readonly placeholder="Java will appear here..."></textarea>
+        </div>
       </div>
-      <p class="read-the-docs">
-        Click on the Vite logo to learn more
-      </p>
-    </div>
+    </main>
   """
 
   setupCounter(dom.document.getElementById("counter"))
