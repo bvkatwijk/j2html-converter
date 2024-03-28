@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.bloop/
+.bsp/
+.metals/
+project/project/
+target/
+project/metals.sbt
