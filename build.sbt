@@ -11,4 +11,5 @@ lazy val converter = project.in(file("."))
           ModuleSplitStyle.SmallModulesFor(List("nl.bvkatwijk.j2html.converter")))
     },
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.4.0",
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.18" % "test"
   )
