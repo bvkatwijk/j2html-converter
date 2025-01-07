@@ -34,9 +34,35 @@ function getInputArea() {
   return document.getElementById("json-input");
 }
 
-function setDefaultInputJson() {
+function setDefaultInput() {
   getInputArea().innerHTML = toPrettyJsonString(getDefaultJson());
   convertJson();
+}
+
+function htmlToJava(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    return traverseNode(doc.body)
+      .replace(/^body\(/, "").replace(/\)$/, "");
+}
+
+function traverseNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent.trim() ? `"${node.textContent.trim()}"` : "";
+    }
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+        const tagName = node.tagName.toLowerCase();
+        const attributes = Array.from(node.attributes)
+            .map(attr => `${attr.name}="${attr.value}"`)
+            .join(", ");
+        const children = Array.from(node.childNodes)
+            .map(child => traverseNode(child))
+            .filter(Boolean)
+            .join(", ");
+        return `${tagName}(${attributes}${attributes && children ? ", " : ""}${children})`;
+    }
+    return "";
 }
 
 function getDefaultJson() {
