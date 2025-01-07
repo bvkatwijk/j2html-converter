@@ -1,41 +1,38 @@
+const inputId = "json-input"
+const outputId = "json-output"
+
 function convert() {
   clearWarning();
   clearOutput();
   var input = getInputArea().value;
   var result = parse(input);
   if (result.sucess) {
-    getInputArea().value = JSON.stringify(result.value, null, 2);
-    var java = asJava(result.value);
-    getOutputArea().innerHTML = java;
+    getOutputArea().innerHTML = result.value;
     hljs.highlightAll();
   } else {
     setWarning(result.value);
   }
 }
 
-function toPrettyJsonString(json) {
-    return JSON.stringify(json, null, 2);
-}
-
 function copyOutput() {
-  var copyText = document.getElementById("json-output");
+  var copyText = document.getElementById(outputId);
   copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
+  copyText.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(copyText.value);
 }
 
 function validate() {}
 
 function getOutputArea() {
-  return document.getElementById("json-output");
+  return document.getElementById(outputId);
 }
 
 function getInputArea() {
-  return document.getElementById("json-input");
+  return document.getElementById(inputId);
 }
 
 function setDefaultInput() {
-  getInputArea().innerHTML = toPrettyJsonString(getDefaultJson());
+  getInputArea().innerHTML = getDefault();
   convert();
 }
 
@@ -72,36 +69,11 @@ function getDefault() {
   </div>`;
 }
 
-function getDefaultJson() {
-  return {
-    glossary: {
-      title: "example glossary",
-      GlossDiv: {
-        title: "S",
-        GlossList: {
-          GlossEntry: {
-            ID: "SGML",
-            SortAs: "SGML",
-            GlossTerm: "Standard Generalized Markup Language",
-            Acronym: "SGML",
-            Abbrev: "ISO 8879:1986",
-            GlossDef: {
-              para: "A meta-markup language, used to create markup languages such as DocBook.",
-              GlossSeeAlso: ["GML", "XML"],
-            },
-            GlossSee: "markup",
-          },
-        },
-      },
-    },
-  };
-}
-
-function parse(jsonString) {
+function parse(html) {
   try {
     return {
       sucess: true,
-      value: JSON.parse(jsonString),
+      value: htmlToJava(html),
     };
   } catch (e) {
     return {
