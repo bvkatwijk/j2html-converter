@@ -1,7 +1,6 @@
-import { test } from 'uvu';
-import * as assert from 'uvu/assert';
-
-import * as index from './index.js';
+const test = require('uvu').test;
+const index = require('./index.js');
+const assert = require('uvu/assert');
 
 test("asJava", () => assert.equal(index.asJava('<div></div>'), 'div()'));
 
