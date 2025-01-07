@@ -63,7 +63,7 @@ function traverseNode(node, indent) {
 }
 
 function renderAttr(attr, indent) {
-  return "\t".repeat(indent) + `.attr("${attr.name}", "${attr.value}")`
+  return "\t".repeat(indent) + `.attr("${attr.name}", "${attr.value}")`;
 }
 
 function getDefault() {
