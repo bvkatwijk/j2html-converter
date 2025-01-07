@@ -1,4 +1,4 @@
-function convertJson() {
+function convert() {
   clearWarning();
   clearOutput();
   var input = getInputArea().value;
@@ -36,7 +36,7 @@ function getInputArea() {
 
 function setDefaultInput() {
   getInputArea().innerHTML = toPrettyJsonString(getDefaultJson());
-  convertJson();
+  convert();
 }
 
 function htmlToJava(html) {
