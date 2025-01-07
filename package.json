@@ -4,7 +4,7 @@
   "description": "Convert HTML to Java j2html",
   "main": "index.js",
   "scripts": {
-    "test": "npx uvu"
+    "test": "npx uvu ./test.js"
   },
   "author": "bvkatwijk@gmail.com",
   "license": "MIT",
