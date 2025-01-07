@@ -1,8 +1,17 @@
-const test = require('uvu').test;
+require('jsdom-global')();
+var assert = require('assert');
 const index = require('./index.js');
-const assert = require('uvu/assert');
 
-//test("asJava", () => assert.equal(index.asJava('<div></div>'), 'div()'));
+describe('html-to-java', function () {
+  describe('#htmlToJava()', function () {
+    it('<div></div> should return div()', function () {
+      assert.equal(index.htmlToJava('<div></div>'), 'div()');
+    });
+  });
 
-test("capitalize", () => assert.equal(index.capitalize("a"), "A"));
-test.run();
+  describe("#capitalize", () => {
+    it('converts a into A', () => {
+      assert.equal(index.capitalize("a"), "A");
+    });
+  });
+});

@@ -4,11 +4,14 @@
   "description": "Convert HTML to Java j2html",
   "main": "index.js",
   "scripts": {
-    "test": "npx uvu"
+    "test": "npx mocha"
   },
   "author": "bvkatwijk@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "uvu": "^0.5.6"
+    "@xmldom/xmldom": "^0.9.6",
+    "jsdom": "25.0.1",
+    "jsdom-global": "3.0.2",
+    "mocha": "^11.0.1"
   }
 }

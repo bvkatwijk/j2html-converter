@@ -37,7 +37,7 @@ function setDefaultInput() {
 }
 
 function htmlToJava(html) {
-    const parser = new DOMParser();
+    const parser = new window.DOMParser();
     const doc = parser.parseFromString(html, "text/html");
     return traverseNode(doc.body)
       .replace(/^body\(/, "").replace(/\)$/, "");
@@ -102,25 +102,13 @@ function setWarning(error) {
     '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
 
-function asJava(json) {
-    var keys = Object.keys(json)
-        .map(it => '\n\t\t.put("' + it + '", instance.get' + capitalize(it) + '())');
-  return (
-    "private static JSONObject json(Instance instance) {" +
-    "\n\treturn new JSONObject()" +
-    keys +
-    ";" +
-    "\n}"
-  );
-}
-
 function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
-    asJava,
+    htmlToJava,
     capitalize
   };
 }
