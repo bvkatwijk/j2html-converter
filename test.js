@@ -1,17 +1,9 @@
 
 import { test } from 'uvu';
-import * as index from './index.js';
 import * as assert from 'uvu/assert';
+import * as index from './index.js';
 
-test("clearWarning", () => {
-  index.clearWarning();
-});
-
-test('Math.sqrt()', () => {
-  assert.is(Math.sqrt(4), 2);
-  assert.is(Math.sqrt(144), 12);
-  assert.is(Math.sqrt(2), Math.SQRT2);
-});
+test("asJava", () => assert.equal(index.asJava('<div></div>'), 'div()'));
 
 test('JSON', () => {
   const input = {
