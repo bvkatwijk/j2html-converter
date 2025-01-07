@@ -1,5 +1,5 @@
-const inputId = "json-input"
-const outputId = "json-output"
+const inputId = "id-input-area"
+const outputId = "id-output-area"
 
 function convert() {
   clearWarning();

@@ -4,3 +4,7 @@ body {
     width: 100vw;
     padding: 40px;
 }
+
+#id-input-area, #id-output-area {
+  height: 70vh;
+}
