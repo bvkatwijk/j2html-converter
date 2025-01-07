@@ -6,7 +6,7 @@ function convert() {
   clearOutput();
   var input = getInputArea().value;
   var result = parse(input);
-  if (result.sucess) {
+  if (result.success) {
     getOutputArea().innerHTML = result.value;
     hljs.highlightAll();
   } else {
@@ -42,26 +42,39 @@ function htmlToJava(html) {
 
 function traverseNode(node, indent) {
     if (node.nodeType === Node.TEXT_NODE) {
-        return node.textContent.trim() ? `"${node.textContent.trim()}"` : "";
+        return `"${node.textContent.trim()}"`;
     }
 
     if (node.nodeType === Node.ELEMENT_NODE) {
         const tagName = node.tagName.toLowerCase();
-        const attributes = Array.from(node.attributes)
-            .map(renderAttr, indent + 1)
-            .join("\n");
-        const children = Array.from(node.childNodes)
-            .map(child => traverseNode(child, indent + 1))
-            .map(child => `.with(${child})`)
-            .filter(Boolean)
-            .join("\n");
-        return `${tagName}()${attributes}${attributes && children ? ", " : ""}${children}`;
+        const attributes = renderAttrsOf(node, indent);
+        const children = renderChildrenOf(node, indent);
+        return `${tagName}()${attributes}${children}`;
     }
-    return "";
+
+    return "nnn";
+}
+
+function renderAttrsOf(node, indent) {
+  return "\n" + Array.from(node.attributes)
+    .map(attr => renderAttr(attr, indent + 1))
+    .join("\n");
 }
 
 function renderAttr(attr, indent) {
   return "\t".repeat(indent) + `.attr("${attr.name}", "${attr.value}")`;
+}
+
+function renderChildrenOf(node, indent) {
+  return Array.from(node.childNodes)
+     .map(child => traverseNode(child, indent + 1))
+     .map(child => renderChild(child, indent + 1))
+     .filter(Boolean)
+     .join("\n");
+}
+
+function renderChild(child, indent) {
+  return "\t".repeat(indent) + `.with(${child})`;
 }
 
 function getDefault() {
@@ -74,12 +87,12 @@ function getDefault() {
 function parse(html) {
   try {
     return {
-      sucess: true,
+      success: true,
       value: htmlToJava(html),
     };
   } catch (e) {
     return {
-      sucess: false,
+      success: false,
       value: e,
     };
   }
