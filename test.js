@@ -5,15 +5,13 @@ const { expect } = require("chai");
 const index = require('./index.js');
 
 describe('html-to-java', function () {
-//  describe('#htmlToJava()', function () {
-//    it('<div></div> should return div()', function () {
-//      assert.equal(index.htmlToJava('<div></div>'), 'div()');
-//    });
-//  });
+  describe('#htmlToJava', function () {
+    it('should render <div></div> as div()', function () {
+      assert.equal(index.htmlToJava('<div></div>'), 'div()');
+    });
 
-  describe("#capitalize", () => {
-    it('converts a into A', () => {
-      assert.equal(index.capitalize("a"), "A");
+    it('should render <div a="b"></div> as div()\n\t.attr("a", "b")', function () {
+      assert.equal(index.htmlToJava('<div a="b"></div>'), 'div()\n\t.attr("a", "b")');
     });
   });
 
