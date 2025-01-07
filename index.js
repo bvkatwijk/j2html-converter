@@ -147,5 +147,8 @@ function capitalize(string) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { asJava };
+  module.exports = {
+    asJava,
+    capitalize
+  };
 }
