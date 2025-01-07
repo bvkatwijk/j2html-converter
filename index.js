@@ -50,21 +50,20 @@ function traverseNode(node, indent) {
     if (node.nodeType === Node.ELEMENT_NODE) {
         const tagName = node.tagName.toLowerCase();
         const attributes = Array.from(node.attributes)
-            .map(renderAttr)
+            .map(renderAttr, indent + 1)
             .join("\n");
         const children = Array.from(node.childNodes)
             .map(child => traverseNode(child, indent + 1))
             .map(child => `.with(${child})`)
             .filter(Boolean)
             .join("\n");
-        return `${tagName}()
-  ${attributes}${attributes && children ? ", " : ""}${children}`;
+        return `${tagName}()${attributes}${attributes && children ? ", " : ""}${children}`;
     }
     return "";
 }
 
-function renderAttr(attr) {
-  return `.attr("${attr.name}", "${attr.value}")`
+function renderAttr(attr, indent) {
+  return "\t".repeat(indent) + `.attr("${attr.name}", "${attr.value}")`
 }
 
 function getDefault() {

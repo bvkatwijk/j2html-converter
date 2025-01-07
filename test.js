@@ -29,8 +29,17 @@ describe('html-to-java', function () {
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = htmlString;
       const element = tempDiv.firstElementChild;
-      attr = Array.from(element.attributes)[1];
-      assert.equal(index.renderAttr(attr), `.attr("a", "b")`);
+      const attr = Array.from(element.attributes)[1];
+      assert.equal(index.renderAttr(attr, 0), `.attr("a", "b")`);
+    });
+
+    it('converts a=b (indent=1) into \t.attr("a", "b")', () => {
+      const htmlString = `<div class="container" a="b"></div>`;
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = htmlString;
+      const element = tempDiv.firstElementChild;
+      const attr = Array.from(element.attributes)[1];
+      assert.equal(index.renderAttr(attr, 1), `\t.attr("a", "b")`);
     });
   });
 });
