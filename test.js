@@ -18,27 +18,25 @@ describe('html-to-java', function () {
   });
 
   describe("#renderAttr", () => {
-  let document;
-    before(function () {
+    function elementFrom(html) {
         document = new jsdom.JSDOM(`<!DOCTYPE html><html><body></body></html>`)
           .window.document;
-    });
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        return tempDiv.firstElementChild;
+    }
+
+    function firstAttribute(htmlString) {
+      return Array.from(elementFrom(htmlString).attributes)[0];
+    }
 
     it('converts a=b into .attr("a", "b")', () => {
-      const htmlString = `<div class="container" a="b"></div>`;
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = htmlString;
-      const element = tempDiv.firstElementChild;
-      const attr = Array.from(element.attributes)[1];
+      const attr = firstAttribute(`<div a="b"></div>`);
       assert.equal(index.renderAttr(attr, 0), `.attr("a", "b")`);
     });
 
-    it('converts a=b (indent=1) into \t.attr("a", "b")', () => {
-      const htmlString = `<div class="container" a="b"></div>`;
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = htmlString;
-      const element = tempDiv.firstElementChild;
-      const attr = Array.from(element.attributes)[1];
+    it('converts a="b" (indent=1) into \t.attr("a", "b")', () => {
+      const attr = firstAttribute(`<div a="b"></div>`);
       assert.equal(index.renderAttr(attr, 1), `\t.attr("a", "b")`);
     });
   });
