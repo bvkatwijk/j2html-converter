@@ -39,10 +39,10 @@ function setDefaultInput() {
 function htmlToJava(html) {
     const parser = new window.DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    return traverseNode(doc.body.firstChild)
+    return traverseNode(doc.body.firstChild, 0)
 }
 
-function traverseNode(node) {
+function traverseNode(node, indent) {
     if (node.nodeType === Node.TEXT_NODE) {
         return node.textContent.trim() ? `"${node.textContent.trim()}"` : "";
     }
@@ -51,10 +51,10 @@ function traverseNode(node) {
         const tagName = node.tagName.toLowerCase();
         const attributes = Array.from(node.attributes)
             .map(renderAttr)
-            .join(", ");
+            .join("\n");
         const children = Array.from(node.childNodes)
-            .map(child => traverseNode(child))
-            .map(child => `\n .with(${child})`)
+            .map(child => traverseNode(child, indent + 1))
+            .map(child => `.with(${child})`)
             .filter(Boolean)
             .join("\n");
         return `${tagName}()
@@ -68,7 +68,7 @@ function renderAttr(attr) {
 }
 
 function getDefault() {
-  return `<div class="container">
+  return `<div class="container" a="b">
       <h1>Hello, World!</h1>
       <p>This is a <strong>sample</strong> paragraph.</p>
   </div>`;
