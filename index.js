@@ -39,8 +39,7 @@ function setDefaultInput() {
 function htmlToJava(html) {
     const parser = new window.DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    return traverseNode(doc.body)
-      .replace(/^body\(/, "").replace(/\)$/, "");
+    return traverseNode(doc.body.firstChild)
 }
 
 function traverseNode(node) {
@@ -51,15 +50,21 @@ function traverseNode(node) {
     if (node.nodeType === Node.ELEMENT_NODE) {
         const tagName = node.tagName.toLowerCase();
         const attributes = Array.from(node.attributes)
-            .map(attr => `${attr.name}="${attr.value}"`)
+            .map(renderAttr)
             .join(", ");
         const children = Array.from(node.childNodes)
             .map(child => traverseNode(child))
+            .map(child => `\n .with(${child})`)
             .filter(Boolean)
-            .join(", ");
-        return `${tagName}(${attributes}${attributes && children ? ", " : ""}${children})`;
+            .join("\n");
+        return `${tagName}()
+  ${attributes}${attributes && children ? ", " : ""}${children}`;
     }
     return "";
+}
+
+function renderAttr(attr) {
+  return `.attr("${attr.name}", "${attr.value}")`
 }
 
 function getDefault() {
@@ -109,6 +114,7 @@ function capitalize(string) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     htmlToJava,
+    renderAttr,
     capitalize
   };
 }
