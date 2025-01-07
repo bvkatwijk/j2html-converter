@@ -21,8 +21,6 @@ function copyOutput() {
   navigator.clipboard.writeText(copyText.value);
 }
 
-function validate() {}
-
 function getOutputArea() {
   return document.getElementById(outputId);
 }
@@ -106,14 +104,9 @@ function setWarning(error) {
     '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
 
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     htmlToJava,
     renderAttr,
-    capitalize
   };
 }
