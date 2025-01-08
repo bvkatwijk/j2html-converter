@@ -52,7 +52,7 @@ function traverseNode(node, indent) {
         return `${tagName}()${attributes}${children}`;
     }
 
-    return "nnn";
+    return "";
 }
 
 function renderAttrsOf(node, indent) {
