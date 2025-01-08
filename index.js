@@ -68,8 +68,8 @@ function renderAttr(attr, indent) {
 function renderChildrenOf(node, indent) {
   return Array.from(node.childNodes)
      .map(child => traverseNode(child, indent + 1))
-     .map(child => renderChild(child, indent + 1))
      .filter(Boolean)
+     .map(child => renderChild(child, indent + 1))
      .join("\n");
 }
 
