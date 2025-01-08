@@ -42,7 +42,8 @@ function htmlToJava(html) {
 
 function traverseNode(node, indent) {
     if (node.nodeType === Node.TEXT_NODE) {
-        return `"${node.textContent.trim()}"`;
+        const text = node.textContent.trim();
+        return text ? `"${text}"` : "";
     }
 
     if (node.nodeType === Node.ELEMENT_NODE) {
@@ -56,13 +57,17 @@ function traverseNode(node, indent) {
 }
 
 function renderAttrsOf(node, indent) {
-  return "\n" + Array.from(node.attributes)
-    .map(attr => renderAttr(attr, indent + 1))
-    .join("\n");
+  return Array.from(node.attributes)
+    .map(attr => "\n" + renderAttr(attr, indent + 1))
+    .join("");
 }
 
 function renderAttr(attr, indent) {
   return "\t".repeat(indent) + `.attr("${attr.name}", "${attr.value}")`;
+}
+
+function indent(level) {
+  return "\t".repeat(level);
 }
 
 function renderChildrenOf(node, indent) {
@@ -70,11 +75,11 @@ function renderChildrenOf(node, indent) {
      .map(child => traverseNode(child, indent + 1))
      .filter(Boolean)
      .map(child => renderChild(child, indent + 1))
-     .join("\n");
+     .join("");
 }
 
 function renderChild(child, indent) {
-  return "\t".repeat(indent) + `.with(${child})`;
+  return "\n"+ "\t".repeat(indent) + `.with(${child})`;
 }
 
 function getDefault() {
