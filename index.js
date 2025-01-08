@@ -42,32 +42,34 @@ function htmlToJava(html) {
 
 function traverseNode(node, indent) {
     if (node.nodeType === Node.TEXT_NODE) {
-        const text = node.textContent.trim();
-        return text ? `"${text}"` : "";
+        return renderText(node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+        return renderNode(node, indent);
+    } else {
+      return "";
     }
+}
 
-    if (node.nodeType === Node.ELEMENT_NODE) {
-        const tagName = node.tagName.toLowerCase();
-        const attributes = renderAttrsOf(node, indent);
-        const children = renderChildrenOf(node, indent);
-        return `${tagName}()${attributes}${children}`;
-    }
+function renderText(node) {
+  const text = node.textContent.trim();
+  return text ? `"${text}"` : ""
+}
 
-    return "";
+function renderNode(node, indent) {
+  const tagName = node.tagName.toLowerCase();
+  const attributes = renderAttrsOf(node, indent);
+  const children = renderChildrenOf(node, indent);
+  return `${tagName}()${attributes}${children}`;
 }
 
 function renderAttrsOf(node, indent) {
   return Array.from(node.attributes)
-    .map(attr => "\n" + renderAttr(attr, indent + 1))
+    .map(attr => "\n" + "\t".repeat(indent + 1) + renderAttr(attr))
     .join("");
 }
 
-function renderAttr(attr, indent) {
-  return "\t".repeat(indent) + `.attr("${attr.name}", "${attr.value}")`;
-}
-
-function indent(level) {
-  return "\t".repeat(level);
+function renderAttr(attr) {
+  return `.attr("${attr.name}", "${attr.value}")`;
 }
 
 function renderChildrenOf(node, indent) {
@@ -126,5 +128,6 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     htmlToJava,
     renderAttr,
+    renderText
   };
 }
