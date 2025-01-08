@@ -17,7 +17,6 @@ describe('html-to-java', function () {
   });
 
   describe("#renderAttr", () => {
-
     it('converts a=b into .attr("a", "b")', () => {
       const attr = firstAttribute(`<div a="b"></div>`);
       assert.equal(index.renderAttr(attr), `.attr("a", "b")`);
@@ -34,7 +33,6 @@ describe('html-to-java', function () {
     });
   });
 });
-
 
 function elementFrom(html) {
     document = new jsdom.JSDOM(`<!DOCTYPE html><html><body></body></html>`)

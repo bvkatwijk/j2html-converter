@@ -1,6 +1,5 @@
 {
   "name": "j2html-converter",
-  "version": "0.1.0",
   "description": "Convert HTML to Java j2html",
   "scripts": {
     "test": "npx mocha"
