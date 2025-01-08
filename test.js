@@ -1,8 +1,9 @@
-var jsonDomGlobal = require('jsdom-global')();
 var jsdom = require('jsdom');
 var assert = require('assert');
 const { expect } = require("chai");
 const index = require('./index.js');
+
+require('jsdom-global')();
 
 describe('html-to-java', function () {
   describe('#htmlToJava', function () {

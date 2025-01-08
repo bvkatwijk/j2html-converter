@@ -2,14 +2,12 @@
   "name": "j2html-converter",
   "version": "0.1.0",
   "description": "Convert HTML to Java j2html",
-  "main": "index.js",
   "scripts": {
     "test": "npx mocha"
   },
   "author": "bvkatwijk@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "@xmldom/xmldom": "^0.9.6",
     "chai": "^5.1.2",
     "jsdom": "25.0.1",
     "jsdom-global": "3.0.2",
