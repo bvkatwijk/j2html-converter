@@ -31,7 +31,7 @@ function setDefaultInput() {
 function htmlToJava(html) {
     const parser = new window.DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    return traverseNode(doc.body.firstChild, 0)
+    return traverseNode(doc.body.firstChild, 0);
 }
 
 function traverseNode(node, indent) {
