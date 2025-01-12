@@ -70,7 +70,10 @@ function copyOutput() {
 
 function renderAttr(attr) {
   const escapedValue = attr.value.replace(/"/g, '\\\"');
-  return `.attr("${attr.name}", "${escapedValue}")`;
+  switch (attr.name) {
+    case "class": return `.withClasses("${escapedValue}")`;
+    default: return `.attr("${attr.name}", "${escapedValue}")`;
+  }
 }
 
 function renderChildrenOf(node, indent) {
