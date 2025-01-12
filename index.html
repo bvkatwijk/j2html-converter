@@ -12,6 +12,7 @@
                 integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
                 crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link
                 rel="stylesheet"
                 href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css"
@@ -44,7 +45,11 @@
                 <div class="col-md-6 output">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Java Output</h5>
+                            <h5 class="card-title d-flex align-items-center">
+                                <span class="me-auto">Output: Java <a href="https://j2html.com/">J2HTML</a></span>
+                                <button class="btn btn-primary" onclick="copyOutput()"><i class="fa-solid fa-copy"></i></button>
+                            </h5>
+                            </h5>
                             <pre>
                       <code readonly class="language-java output-area" id="id-output-area">
                       </code>
