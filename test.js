@@ -5,13 +5,13 @@ const index = require('./index.js');
 
 require('jsdom-global')();
 
-describe('html-to-java', function () {
-  describe('#htmlToJava', function () {
-    it('should render <div></div> as div()', function () {
+describe('html-to-java', () => {
+  describe('#htmlToJava', () => {
+    it('should render <div></div> as div()', () => {
       assert.equal(index.htmlToJava('<div></div>'), 'div()');
     });
 
-    it('should render <div a="b"></div> as div()\n\t.attr("a", "b")', function () {
+    it('should render <div a="b"></div> as div()\n\t.attr("a", "b")', () => {
       assert.equal(index.htmlToJava('<div a="b"></div>'), 'div()\n\t.attr("a", "b")');
     });
   });
