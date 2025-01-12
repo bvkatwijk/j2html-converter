@@ -14,13 +14,6 @@ function convert() {
   }
 }
 
-function copyOutput() {
-  var copyText = document.getElementById(outputId);
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(copyText.value);
-}
-
 function getOutputArea() {
   return document.getElementById(outputId);
 }
@@ -66,6 +59,13 @@ function renderAttrsOf(node, indent) {
   return Array.from(node.attributes)
     .map(attr => "\n" + "\t".repeat(indent + 1) + renderAttr(attr))
     .join("");
+}
+
+function copyOutput() {
+  navigator.clipboard.writeText(
+    document.getElementById(outputId)
+      .textContent
+    );
 }
 
 function renderAttr(attr) {
