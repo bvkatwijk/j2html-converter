@@ -71,9 +71,16 @@ function copyOutput() {
 function renderAttr(attr) {
   const escapedValue = attr.value.replace(/"/g, '\\\"');
   switch (attr.name) {
-    case "class": return `.withClasses("${escapedValue}")`;
+    case "class": return attrClass(escapedValue.split(" "));
     default: return `.attr("${attr.name}", "${escapedValue}")`;
   }
+}
+
+function attrClass(values) {
+  const v = values.map(v => `"${v}"`).join(", ");
+  return values.length >= 1
+    ? `.withClasses(${v})`
+    : `.withClass(${v})`;
 }
 
 function renderChildrenOf(node, indent) {
