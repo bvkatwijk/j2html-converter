@@ -17,9 +17,16 @@ describe('html-to-java', function () {
   });
 
   describe("#renderAttr", () => {
-    it('converts a=b into .attr("a", "b")', () => {
-      const attr = firstAttribute(`<div a="b"></div>`);
-      assert.equal(index.renderAttr(attr), `.attr("a", "b")`);
+    function testAttr(attr) {
+      return firstAttribute(`<div ${attr}></div>`);
+    }
+
+    it('converts a="b" into .attr("a", "b")', () => {
+      assert.equal(index.renderAttr(testAttr('a="b"')), `.attr("a", "b")`);
+    });
+
+    it('escapes attr containing double quotes', () => {
+      assert.equal(index.renderAttr(testAttr('hx-vals="{&quot;page&quot;:&quot;0&quot;}"')), `.attr("hx-vals", "{\\\"page\\\":\\\"0\\\"}")`)
     });
   });
 
