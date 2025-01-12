@@ -32,6 +32,11 @@ describe('html-to-java', function () {
     it('converts class="a" into .withClasses("a")', () => {
       assert.equal(index.renderAttr(testAttr('class="a"')), `.withClasses("a")`);
     });
+
+
+    it('converts class="a b" into .withClasses("a", "b")', () => {
+      assert.equal(index.renderAttr(testAttr('class="a b"')), `.withClasses("a", "b")`);
+    });
   });
 
   describe("#renderText", () => {
