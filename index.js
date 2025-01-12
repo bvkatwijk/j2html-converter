@@ -1,5 +1,6 @@
-const inputId = "id-input-area"
-const outputId = "id-output-area"
+const inputId = "id-input-area";
+const outputId = "id-output-area";
+const indentation = "\t";
 
 function convert() {
   clearWarning();
@@ -57,7 +58,7 @@ function renderNode(node, indent) {
 
 function renderAttrsOf(node, indent) {
   return Array.from(node.attributes)
-    .map(attr => "\n" + "\t".repeat(indent + 1) + renderAttr(attr))
+    .map(attr => "\n" + indentation.repeat(indent + 1) + renderAttr(attr))
     .join("");
 }
 
@@ -84,15 +85,16 @@ function attrClass(values) {
 }
 
 function renderChildrenOf(node, indent) {
+  const childIndent = indent + 1;
   return Array.from(node.childNodes)
-     .map(child => traverseNode(child, indent + 1))
+     .map(child => traverseNode(child, childIndent))
      .filter(Boolean)
-     .map(child => renderChild(child, indent + 1))
+     .map(child => renderChild(child, childIndent))
      .join("");
 }
 
 function renderChild(child, indent) {
-  return "\n"+ "\t".repeat(indent) + `.with(${child})`;
+  return "\n"+ indentation.repeat(indent) + `.with(${child})`;
 }
 
 function getDefault() {
