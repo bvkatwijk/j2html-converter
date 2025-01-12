@@ -28,6 +28,10 @@ describe('html-to-java', function () {
     it('escapes attr containing double quotes', () => {
       assert.equal(index.renderAttr(testAttr('hx-vals="{&quot;page&quot;:&quot;0&quot;}"')), `.attr("hx-vals", "{\\\"page\\\":\\\"0\\\"}")`)
     });
+
+    it('converts class="a" into .withClasses("a")', () => {
+      assert.equal(index.renderAttr(testAttr('class="a"')), `.withClasses("a")`);
+    });
   });
 
   describe("#renderText", () => {
