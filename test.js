@@ -33,19 +33,22 @@ describe('html-to-java', function () {
       assert.equal(index.renderAttr(testAttr('class="a"')), `.withClasses("a")`);
     });
 
-
     it('converts class="a b" into .withClasses("a", "b")', () => {
       assert.equal(index.renderAttr(testAttr('class="a b"')), `.withClasses("a", "b")`);
     });
   });
 
   describe("#renderText", () => {
+    function testText(string) {
+      return elementFrom(`<div>${string}</div>`);
+    }
+
     it("renders a as \"a\"", () => {
-      assert.equal(index.renderText(elementFrom("<div>a</div>")), "\"a\"");
+      assert.equal(index.renderText(testText("a")), "\"a\"");
     });
 
     it("renders empty text as empty string", () => {
-      assert.equal(index.renderText(elementFrom("<div></div>")), "");
+      assert.equal(index.renderText(testText("")), "");
     });
   });
 });
