@@ -26,7 +26,7 @@ describe('html-to-java', function () {
     });
 
     it('escapes attr containing double quotes', () => {
-      assert.equal(index.renderAttr(testAttr('hx-vals="{&quot;page&quot;:&quot;0&quot;}"')), `.attr("a", "\"b\"")`)
+      assert.equal(index.renderAttr(testAttr('hx-vals="{&quot;page&quot;:&quot;0&quot;}"')), `.attr("hx-vals", "{\\\"page\\\":\\\"0\\\"}")`)
     });
   });
 

@@ -69,7 +69,8 @@ function renderAttrsOf(node, indent) {
 }
 
 function renderAttr(attr) {
-  return `.attr("${attr.name}", "${attr.value}")`;
+  const escapedValue = attr.value.replace(/"/g, '\\\"');
+  return `.attr("${attr.name}", "${escapedValue}")`;
 }
 
 function renderChildrenOf(node, indent) {
