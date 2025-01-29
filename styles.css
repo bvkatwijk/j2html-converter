@@ -8,3 +8,7 @@ body {
 #id-input-area, #id-output-area {
   height: 70vh;
 }
+
+.output-area {
+  height: 100%
+}
