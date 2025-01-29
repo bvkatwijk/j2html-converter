@@ -1,5 +1,6 @@
-const inputId = "id-input-area"
-const outputId = "id-output-area"
+const inputId = "id-input-area";
+const outputId = "id-output-area";
+const indentation = "\t";
 
 function convert() {
   clearWarning();
@@ -30,7 +31,7 @@ function setDefaultInput() {
 function htmlToJava(html) {
     const parser = new window.DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    return traverseNode(doc.body.firstChild, 0)
+    return traverseNode(doc.body.firstChild, 0);
 }
 
 function traverseNode(node, indent) {
@@ -57,7 +58,7 @@ function renderNode(node, indent) {
 
 function renderAttrsOf(node, indent) {
   return Array.from(node.attributes)
-    .map(attr => "\n" + "\t".repeat(indent + 1) + renderAttr(attr))
+    .map(attr => "\n" + indentation.repeat(indent + 1) + renderAttr(attr))
     .join("");
 }
 
@@ -84,10 +85,11 @@ function attrClass(values) {
 }
 
 function renderChildrenOf(node, indent) {
+  const childIndent = indent + 1;
   return Array.from(node.childNodes)
-     .map(child => traverseNode(child, indent + 1))
+     .map(child => traverseNode(child, childIndent))
      .filter(Boolean)
-     .map(child => renderChild(child, indent + 1))
+     .map(child => renderChild(child, childIndent))
      .join("");
 }
 

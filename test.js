@@ -5,13 +5,13 @@ const index = require('./index.js');
 
 require('jsdom-global')();
 
-describe('html-to-java', function () {
-  describe('#htmlToJava', function () {
-    it('should render <div></div> as div()', function () {
+describe('html-to-java', () => {
+  describe('#htmlToJava', () => {
+    it('should render <div></div> as div()', () => {
       assert.equal(index.htmlToJava('<div></div>'), 'div()');
     });
 
-    it('should render <div a="b"></div> as div()\n\t.attr("a", "b")', function () {
+    it('should render <div a="b"></div> as div()\n\t.attr("a", "b")', () => {
       assert.equal(index.htmlToJava('<div a="b"></div>'), 'div()\n\t.attr("a", "b")');
     });
   });
@@ -33,7 +33,6 @@ describe('html-to-java', function () {
       assert.equal(index.renderAttr(testAttr('class="a"')), `.withClasses("a")`);
     });
 
-
     it('converts class="a b" into .withClasses("a", "b")', () => {
       assert.equal(index.renderAttr(testAttr('class="a b"')), `.withClasses("a", "b")`);
     });
@@ -50,12 +49,16 @@ describe('html-to-java', function () {
   });
 
   describe("#renderText", () => {
+    function testText(string) {
+      return elementFrom(`<div>${string}</div>`);
+    }
+
     it("renders a as \"a\"", () => {
-      assert.equal(index.renderText(elementFrom("<div>a</div>")), "\"a\"");
+      assert.equal(index.renderText(testText("a")), "\"a\"");
     });
 
     it("renders empty text as empty string", () => {
-      assert.equal(index.renderText(elementFrom("<div></div>")), "");
+      assert.equal(index.renderText(testText("")), "");
     });
   });
 });
