@@ -62,6 +62,13 @@ function renderAttrsOf(node, indent) {
     .join("");
 }
 
+function copyInput() {
+  navigator.clipboard.writeText(
+    document.getElementById(inputId)
+      .textContent
+    );
+}
+
 function copyOutput() {
   navigator.clipboard.writeText(
     document.getElementById(outputId)
