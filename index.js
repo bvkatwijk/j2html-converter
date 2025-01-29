@@ -92,7 +92,15 @@ function renderChildrenOf(node, indent) {
 }
 
 function renderChild(child, indent) {
-  return "\n"+ "\t".repeat(indent) + `.with(${child})`;
+  return "\n"+ "\t".repeat(indent) + prefixWith(child);
+}
+
+function prefixWith(child) {
+  if (child.startsWith('"')) {
+    return `.withText(${child})`;
+  } else {
+    return `.with(${child})`;
+  }
 }
 
 function getDefault() {
@@ -139,6 +147,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     htmlToJava,
     renderAttr,
+    renderChild,
     renderText
   };
 }

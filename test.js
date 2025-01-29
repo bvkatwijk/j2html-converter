@@ -39,6 +39,16 @@ describe('html-to-java', function () {
     });
   });
 
+  describe("#renderChild", () => {
+    it("renders quoted string as as .withText(\"data\")", () => {
+      assert.equal(index.renderChild("\"data\""), "\n.withText(\"data\")");
+    });
+
+    it("renders non-qouted string as as .with(data)", () => {
+      assert.equal(index.renderChild("data"), "\n.with(data)");
+    });
+  });
+
   describe("#renderText", () => {
     it("renders a as \"a\"", () => {
       assert.equal(index.renderText(elementFrom("<div>a</div>")), "\"a\"");
