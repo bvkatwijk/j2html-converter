@@ -80,6 +80,7 @@ function renderAttr(attr) {
   const escapedValue = attr.value.replace(/"/g, '\\\"');
   switch (attr.name) {
     case "class": return attrClass(escapedValue.split(" "));
+    case "style": return `.withStyle("${escapedValue}")`;
     default: return `.attr("${attr.name}", "${escapedValue}")`;
   }
 }
@@ -113,7 +114,7 @@ function prefixWith(child) {
 }
 
 function getDefault() {
-  return `<div class="container" a="b">
+  return `<div class="container" a="b" style="color: red;">
     <h1>Hello, World!</h1>
     <p>This is a <strong>sample</strong> paragraph.</p>
 </div>`;

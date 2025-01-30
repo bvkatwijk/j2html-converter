@@ -21,6 +21,12 @@ describe('html-to-java', () => {
       return firstAttribute(`<div ${attr}></div>`);
     }
 
+    describe("#style", () => {
+      it('converts style="color: red;" into .withStyle("color: red;")', () => {
+        assert.equal(index.renderAttr(testAttr('style="color: red;"')), `.withStyle("color: red;")`);
+      });
+    });
+
     it('converts a="b" into .attr("a", "b")', () => {
       assert.equal(index.renderAttr(testAttr('a="b"')), `.attr("a", "b")`);
     });
