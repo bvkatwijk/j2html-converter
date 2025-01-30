@@ -4,8 +4,8 @@ body {
     width: 100vw;
 }
 
-.main {
-  padding: 40px;
+.navbar {
+  margin-bottom: 40px;
 }
 
 #id-input-area, #id-output-area {
