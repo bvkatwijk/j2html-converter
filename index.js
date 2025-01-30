@@ -114,9 +114,9 @@ function prefixWith(child) {
 
 function getDefault() {
   return `<div class="container" a="b">
-      <h1>Hello, World!</h1>
-      <p>This is a <strong>sample</strong> paragraph.</p>
-  </div>`;
+    <h1>Hello, World!</h1>
+    <p>This is a <strong>sample</strong> paragraph.</p>
+</div>`;
 }
 
 function parse(html) {
