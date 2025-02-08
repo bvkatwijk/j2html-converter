@@ -21,15 +21,33 @@ describe('html-to-java', () => {
       return firstAttribute(`<div ${attr}></div>`);
     }
 
-    describe("#style", () => {
+    describe("style", () => {
       it('converts style="color: red;" into .withStyle("color: red;")', () => {
         assert.equal(index.renderAttr(testAttr('style="color: red;"')), `.withStyle("color: red;")`);
       });
     });
 
-    describe("#src", () => {
+    describe("src", () => {
       it('converts src="/img/hello.png" into .withSrc("/img/hello.png")', () => {
         assert.equal(index.renderAttr(testAttr('src="/img/hello.png"')), `.withSrc("/img/hello.png")`);
+      });
+    });
+
+    describe("id", () => {
+      it('converts id="a" into .withId("a")', () => {
+        assert.equal(index.renderAttr(testAttr('id="a"')), `.withId("a")`);
+      });
+    });
+
+    describe("rel", () => {
+      it('converts rel="stylesheet" into .withRel("stylesheet")', () => {
+        assert.equal(index.renderAttr(testAttr('rel="stylesheet"')), `.withRel("stylesheet")`);
+      });
+    });
+
+    describe("href", () => {
+      it('converts href="/css/hello.css" into .withHref("/css/hello.css")', () => {
+        assert.equal(index.renderAttr(testAttr('href="/css/hello.css"')), `.withHref("/css/hello.css")`);
       });
     });
 

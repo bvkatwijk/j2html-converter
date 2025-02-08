@@ -80,8 +80,11 @@ function renderAttr(attr) {
   const escapedValue = attr.value.replace(/"/g, '\\\"');
   switch (attr.name) {
     case "class": return attrClass(escapedValue.split(" "));
-    case "style": return `.withStyle("${escapedValue}")`;
+    case "id": return `.withId("${escapedValue}")`;
+    case "href": return `.withHref("${escapedValue}")`;
+    case "rel": return `.withRel("${escapedValue}")`;
     case "src": return `.withSrc("${escapedValue}")`;
+    case "style": return `.withStyle("${escapedValue}")`;
     default: return `.attr("${attr.name}", "${escapedValue}")`;
   }
 }
