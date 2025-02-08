@@ -81,6 +81,7 @@ function renderAttr(attr) {
   switch (attr.name) {
     case "class": return attrClass(escapedValue.split(" "));
     case "style": return `.withStyle("${escapedValue}")`;
+    case "src": return `.withSrc("${escapedValue}")`;
     default: return `.attr("${attr.name}", "${escapedValue}")`;
   }
 }
@@ -116,6 +117,7 @@ function prefixWith(child) {
 function getDefault() {
   return `<div class="container" a="b" style="color: red;">
     <h1>Hello, World!</h1>
+    <img src="/img/hello.png">
     <p>This is a <strong>sample</strong> paragraph.</p>
 </div>`;
 }

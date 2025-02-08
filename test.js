@@ -27,6 +27,12 @@ describe('html-to-java', () => {
       });
     });
 
+    describe("#src", () => {
+      it('converts src="/img/hello.png" into .withSrc("/img/hello.png")', () => {
+        assert.equal(index.renderAttr(testAttr('src="/img/hello.png"')), `.withSrc("/img/hello.png")`);
+      });
+    });
+
     it('converts a="b" into .attr("a", "b")', () => {
       assert.equal(index.renderAttr(testAttr('a="b"')), `.attr("a", "b")`);
     });
